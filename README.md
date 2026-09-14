@@ -1,8 +1,8 @@
 # TraceLens Network Analyzer (TraceLens NPA)
 
-> **A professional, free, offline-capable network traffic analysis workstation inspired by Wireshark with real-time live capture, deep protocol inspection, heuristic threat detection, and local Ollama AI copilot.**
+> **A professional, free, offline-capable, web-based network traffic analysis workstation designed for Windows and inspired by Wireshark, with real-time live capture, deep protocol inspection, heuristic threat detection, and a local Ollama AI copilot.**
 
-> **Platform:** TraceLens NPA is currently designed and tested for **Windows 10/11**. Native Windows components such as Npcap, Wireshark/tshark, and PowerShell are used for live packet capture and system integration. Linux and macOS are not currently supported.
+> **Platform:** TraceLens NPA is currently designed and tested for **Windows 10/11**. The application provides a web-based interface, while native Windows components such as Npcap, Wireshark/tshark, and PowerShell are used for live packet capture and system integration. Linux and macOS are not currently supported.
 
 ## Usage Rights
 
@@ -42,7 +42,7 @@ information.
 2. **Live Packet Capture**:
    - Windows Npcap support with automatic interface enumeration.
    - BPF capture filters (e.g. `tcp port 80`, `udp port 53`, `host 192.168.1.1`).
-   - Real-time packet streaming to frontend over WebSockets with live packet rate and throughput telemetry.
+   - Real-time packet streaming to the web frontend over WebSockets with live packet rate and throughput telemetry.
 3. **Advanced Wireshark Display Filter Engine**:
    - Official Wireshark display filter syntax validation and execution (e.g., `tcp.port == 443`, `ip.src == 192.168.1.10`, `dns.qry.name contains "google"`).
    - Real-time syntax validation badge and autocomplete suggestions.
@@ -61,7 +61,7 @@ information.
    - Natural language to Wireshark display filter generator.
    - Full AI Security & Traffic Analysis report generator with Markdown export.
 8. **Command Palette (`Ctrl+K`) & Keyboard Shortcuts**:
-   - Desktop-optimized workstation ergonomics with keyboard navigation.
+   - Web-based workstation interface with keyboard-driven navigation and productivity features.
 
 ---
 
@@ -136,14 +136,6 @@ Contributions, issues, and feature requests are welcome!
 Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) for development requirements,
 contribution guidelines, security considerations, and pull request
 instructions.
-
-feature requests.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git origin -u push feature/AmazingFeature`)
-5. Open a Pull Request
 
 ---
 
