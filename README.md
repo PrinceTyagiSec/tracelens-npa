@@ -157,10 +157,6 @@ Cybersecurity enthusiast and developer focused on cybersecurity, network securit
 * LinkedIn: [prince-tyagi1](https://www.linkedin.com/in/prince-tyagi1/)
 * Portfolio: [prince-tyagi.netlify.app](https://prince-tyagi.netlify.app/)
 
-**Prince Tyagi**
-
-- GitHub: [@PrinceTyagiSec](https://github.com/PrinceTyagiSec/)
-
 ---
 
 ## License
