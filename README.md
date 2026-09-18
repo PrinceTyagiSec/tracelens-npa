@@ -79,7 +79,7 @@ information.
 Clone the repository and set the PowerShell execution policy for the current session (if script execution is restricted):
 
 ```powershell
-git clone [https://github.com/PrinceTyagiSec/tracelens-npa.git](https://github.com/PrinceTyagiSec/tracelens-npa.git)
+git clone https://github.com/PrinceTyagiSec/tracelens-npa.git
 cd tracelens-npa
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
