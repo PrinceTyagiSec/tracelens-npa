@@ -261,8 +261,13 @@ export const App: React.FC = () => {
     setIsPaused(false);
     // Reload capture from backend
     if (res.capture_id) {
-      setTimeout(() => {
-        loadLatestOrSampleCapture();
+      setTimeout(async () => {
+                 try {
+        const capture = await api.getCapture(res.capture_id);
+        await selectCapture(capture);
+      } catch {
+        // Ignore
+      }
       }, 1000);
     }
   };
