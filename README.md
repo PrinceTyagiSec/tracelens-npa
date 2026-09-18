@@ -69,12 +69,31 @@ information.
 
 ### Prerequisites
 
-- **Python 3.10+** (ensure it's added to your system PATH)
+- **Python 3.11+** (ensure it's added to your system PATH)
 - **Node.js 18+**
 - **Wireshark / tshark & Npcap** (installed in default paths, typically `C:\Program Files\Wireshark`)
-- **Ollama** (optional for AI features; run `ollama run llama3.1:8b` beforehand)
+- **Ollama** (optional for AI copilot; run `ollama pull llama3.1:8b` beforehand)
 
-### 1-Click Launch (PowerShell)
+### 1. Repository Setup
+
+Clone the repository and set the PowerShell execution policy for the current session (if script execution is restricted):
+
+```powershell
+git clone [https://github.com/PrinceTyagiSec/tracelens-npa.git](https://github.com/PrinceTyagiSec/tracelens-npa.git)
+cd tracelens-npa
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+### 2. Environment Setup
+
+Run the setup script to install and verify Python and Node.js dependencies:
+
+```powershell
+./scripts/setup.ps1
+```
+
+### 3. Launching TraceLens NPA
+#### 1-Click Launch (PowerShell)
 
 ```powershell
 ./scripts/start_all.ps1
@@ -82,20 +101,18 @@ information.
 
 This script launches both backend and frontend servers and opens `http://localhost:5173` in your default browser.
 
-### Manual Launch
+#### Manual Launch
 
 **Backend**:
 
 ```powershell
-python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
+./scripts/start_backend.ps1
 ```
 
 **Frontend**:
 
 ```powershell
-cd frontend
-npm install
-npm run dev
+./scripts/start_frontend.ps1
 ```
 
 Visit: **`http://localhost:5173`**
