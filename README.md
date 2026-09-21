@@ -2,7 +2,7 @@
 
 > **A professional, free, offline-capable, web-based network traffic analysis workstation designed for Windows and inspired by Wireshark, with real-time live capture, deep protocol inspection, heuristic threat detection, and a local Ollama AI copilot.**
 
-> **Platform:** TraceLens NPA is currently designed and tested for **Windows 10/11**. The application provides a web-based interface, while native Windows components such as Npcap, Wireshark/tshark, and PowerShell are used for live packet capture and system integration. Linux and macOS are not currently supported.
+> **Platform:** TraceLens NPA is currently designed and tested for **Windows 10/11 and Linux**. The application provides a web-based interface, with platform-specific packet capture and launch scripts. Windows uses Npcap, Wireshark/tshark, and PowerShell, while Linux uses native packet capture tools such as dumpcap/tshark and Bash. macOS is not currently supported.
 
 ## Usage Rights
 
@@ -28,9 +28,9 @@ See [`LICENSE`](LICENSE) for complete terms and commercial licensing
 information.
 
 [![License: Non-Commercial](https://img.shields.io/badge/License-Non--Commercial-orange.svg)](LICENSE)
-[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![Node Version](https://img.shields.io/badge/node-18%2B-green.svg)](https://nodejs.org/)
-[![Platform](<https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg>)](WINDOWS_SETUP.md)
+[![Platform](<https://img.shields.io/badge/platform-Windows%2010%2F11%20%7C%20Linux-blue.svg>)](README.md)
 
 ---
 
@@ -65,18 +65,22 @@ information.
 
 ---
 
-## Quick Start (Windows)
+## Quick Start
 
-### Prerequisites
+TraceLens NPA supports **Windows 10/11 and Linux**.
 
-- **Python 3.11+** (ensure it's added to your system PATH)
+### Windows
+
+#### Prerequisites
+
+- **Python 3.11+**
 - **Node.js 18+**
-- **Wireshark / tshark & Npcap** (installed in default paths, typically `C:\Program Files\Wireshark`)
-- **Ollama** (optional for AI copilot; run `ollama pull llama3.1:8b` beforehand)
+- **Wireshark / tshark & Npcap**
+- **Ollama** (optional for AI copilot)
 
-### 1. Repository Setup
+#### 1. Repository Setup
 
-Clone the repository and set the PowerShell execution policy for the current session (if script execution is restricted):
+Clone the repository:
 
 ```powershell
 git clone https://github.com/PrinceTyagiSec/tracelens-npa.git
@@ -84,38 +88,99 @@ cd tracelens-npa
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
-### 2. Environment Setup
-
-Run the setup script to install and verify Python and Node.js dependencies:
+#### 2. Environment Setup
 
 ```powershell
-./scripts/setup.ps1
+./scripts/windows/setup.ps1
 ```
 
-### 3. Launching TraceLens NPA
-#### 1-Click Launch (PowerShell)
+#### 3. Launch TraceLens NPA
+
+**1-Click Launch:**
 
 ```powershell
-./scripts/start_all.ps1
+./scripts/windows/start_all.ps1
 ```
 
-This script launches both backend and frontend servers and opens `http://localhost:5173` in your default browser.
+Or launch the services separately.
 
-#### Manual Launch
-
-**Backend**:
+**Backend:**
 
 ```powershell
-./scripts/start_backend.ps1
+./scripts/windows/start_backend.ps1
 ```
 
-**Frontend**:
+**Frontend:**
 
 ```powershell
-./scripts/start_frontend.ps1
+./scripts/windows/start_frontend.ps1
 ```
 
-Visit: **`http://localhost:5173`**
+Visit:
+
+**`http://localhost:5173`**
+
+---
+
+### Linux
+
+#### Prerequisites
+
+- **Python 3.11+**
+- **Node.js 18+**
+- **Wireshark / tshark or dumpcap**
+- Appropriate permissions for packet capture
+- **Ollama** (optional for AI copilot)
+
+#### 1. Repository Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/PrinceTyagiSec/tracelens-npa.git
+cd tracelens-npa
+```
+
+#### 2. Environment Setup
+
+Make the Linux scripts executable:
+
+```bash
+chmod +x scripts/linux/*.sh
+```
+
+Run the setup script:
+
+```bash
+./scripts/linux/setup.sh
+```
+
+#### 3. Launch TraceLens NPA
+
+**1-Click Launch:**
+
+```bash
+./scripts/linux/start_all.sh
+```
+
+Or launch the services separately.
+
+**Backend:**
+
+```bash
+./scripts/linux/start_backend.sh
+```
+
+**Frontend:**
+
+```bash
+./scripts/linux/start_frontend.sh
+```
+
+Visit:
+
+**`http://localhost:5173`**
+
 
 ---
 
@@ -131,18 +196,31 @@ TraceLens NPA
 │   ├── api/           # REST endpoints for captures, packets, filters, stats, AI, live capture
 │   ├── parsers/       # tshark summary stream, layer dissector, follow stream engine
 │   ├── analysis/      # HTTP/DNS/TLS extractors, security heuristics, risk score, IOCs
-│   ├── capture/       # dumpcap/tshark Windows live capture manager
+│   ├── capture/       # Cross-platform dumpcap/tshark live capture manager
 │   ├── ai/            # Async Ollama client, RAG context engine, safe tools, report generator
-│   └── core/          # Windows dependency detector & structured logging
-└── scripts/           # Sample PCAP generator and launch scripts
+│   └── core/          # Platform dependency detection & structured logging
+└── scripts/
+    ├── windows/       # Windows setup and launch scripts
+    └── linux/         # Linux setup and launch scripts
 ```
 
 ---
 
 ## Troubleshooting
 
-- **`tshark` not found**: Ensure Wireshark is installed and `tshark.exe` is accessible via your system environment variables (or located in `C:\Program Files\Wireshark`).
-- **Live capture permission errors**: Ensure Npcap is installed in "WinPcap API-compatible mode" and that you are running your terminal with appropriate privileges if capturing on restricted interfaces.
+### Windows
+
+- **`tshark` not found**: Ensure Wireshark is installed and `tshark.exe` is accessible via your system environment variables or located in `C:\Program Files\Wireshark`.
+- **Live capture permission errors**: Ensure Npcap is installed in "WinPcap API-compatible mode" and run the application with appropriate privileges if required.
+
+### Linux
+
+- **`tshark` or `dumpcap` not found**: Install Wireshark/tshark using your distribution's package manager.
+- **Live capture permission errors**: Ensure your user has the required packet-capture permissions or run the capture component with appropriate privileges.
+- **Scripts are not executable**: Run:
+  ```bash
+  chmod +x scripts/linux/*.sh
+  ```
 
 ---
 
