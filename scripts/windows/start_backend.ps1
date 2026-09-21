@@ -9,7 +9,7 @@ Write-Host ""
 # Project root
 # --------------------------------------------------
 
-$ProjectRoot = Split-Path -Parent $PSScriptRoot
+$ProjectRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 
 Set-Location $ProjectRoot
 
@@ -27,7 +27,7 @@ if (-not (Test-Path $Python)) {
     Write-Host $Python -ForegroundColor Yellow
     Write-Host ""
     Write-Host "Run setup first:" -ForegroundColor Yellow
-    Write-Host "    .\scripts\setup.ps1" -ForegroundColor Cyan
+    Write-Host "    .\scripts\windows\setup.ps1" -ForegroundColor Cyan
     Write-Host ""
 
     exit 1
@@ -44,7 +44,7 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host "[ERROR] Uvicorn is not installed in the TraceLens virtual environment." -ForegroundColor Red
     Write-Host ""
     Write-Host "Run setup again:" -ForegroundColor Yellow
-    Write-Host "    .\scripts\setup.ps1" -ForegroundColor Cyan
+    Write-Host "    .\scripts\windows\setup.ps1" -ForegroundColor Cyan
     Write-Host ""
 
     exit 1

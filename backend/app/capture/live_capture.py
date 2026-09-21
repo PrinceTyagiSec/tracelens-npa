@@ -3,6 +3,7 @@ import time
 import asyncio
 import subprocess
 import threading
+import tempfile
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Callable
 from backend.app.core.detector import detector
@@ -91,7 +92,9 @@ class LiveCaptureManager:
             return {"status": "error", "message": "Capture already running"}
 
         self.capture_id = capture_id or f"live_{int(time.time())}"
-        self.current_filepath = str(CAPTURES_DIR / f"{self.capture_id}.pcap")
+        self.current_filepath = str(
+            Path(tempfile.gettempdir()) / f"{self.capture_id}.pcap"
+        )
         self.current_interface = interface
         self.start_time = time.time()
         self.last_rate_calc = self.start_time

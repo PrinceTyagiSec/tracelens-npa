@@ -10,7 +10,7 @@ Write-Host ""
 # PROJECT ROOT
 # --------------------------------------------------
 
-$ProjectRoot = Split-Path -Parent $PSScriptRoot
+$ProjectRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $FrontendPath = Join-Path $ProjectRoot "frontend"
 
 Set-Location $ProjectRoot
@@ -398,5 +398,5 @@ Write-Host "Setup is complete." -ForegroundColor Green
 Write-Host ""
 Write-Host "To start TraceLens NPA:" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "    .\scripts\start_all.ps1" -ForegroundColor White
+Write-Host "    .\scripts\windows\start_all.ps1" -ForegroundColor White
 Write-Host ""
